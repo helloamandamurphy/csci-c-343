@@ -1,14 +1,15 @@
-
-
+// This is the interface class, which uses SqrMatrix.h logic
 #include "SqrMatrix.h"
 #include <iostream>
 #include <iomanip>
 
+// Constructor with no parameters, default size to 1
 SqrMatrix::SqrMatrix() {
     size = 1;
     sq = nullptr;
 }
 
+// Constructor with integer input of N, set size to N
 SqrMatrix::SqrMatrix(int N) {
     size = N;
     sq = nullptr;
