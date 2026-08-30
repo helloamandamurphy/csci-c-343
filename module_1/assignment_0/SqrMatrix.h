@@ -1,4 +1,4 @@
-// Implementation file
+// Interface file
 #ifndef C343_ASSIGNMENT0_SQRMATRIX_H // If SQRMATRIX_H is not defined
 #define C343_ASSIGNMENT0_SQRMATRIX_H // Define it as this
 #include <iostream>
@@ -6,7 +6,7 @@
 // Class definition
 class SqrMatrix {
 
-private: // think this is private by default so this doesn't change the access level
+private: // this is private by default so this doesn't change the access level
 
     /**
      * Description: Holds the size of the NxN matrix where size is analogous to N

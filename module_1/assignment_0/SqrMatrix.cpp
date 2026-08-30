@@ -1,4 +1,4 @@
-// This is the interface class, which uses SqrMatrix.h logic
+// This is the implementation class, which uses SqrMatrix.h logic
 #include "SqrMatrix.h"
 #include <iostream>
 #include <iomanip>
@@ -60,7 +60,11 @@ SqrMatrix* SqrMatrix::operator * ( SqrMatrix* smPtrB) {
     for(int i = 0; i < size; ++i)
         for(int j = 0; j < size; ++j)
             for(int k = 0; k < size; ++k) {
-                m3->sq[i][j] += sq[i][k] * smPtrB-> sq[k][j]; //m
+                // m3->sq[i][j]: dereference m3 pointer to get the object and access sq array at (i,j)
+                // smPtr-> sq[k][j]: dereference smPtrB pointer to get the object and access sq array at (k,j)
+                // multiply the value at sq[i][k] and the value at sq[k][j] and add it to the value of sq[i][j]
+                // sq[i][j] is in m3 matrix; sq[i][k] is in m1 matrix; sq[k][j] is in m2 matrix
+                m3-> sq[i][j] += sq[i][k] * smPtrB-> sq[k][j];
             }
     return m3;
 }
