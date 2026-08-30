@@ -17,7 +17,7 @@ SqrMatrix::SqrMatrix() {
 }
 
 // Constructor with integer input of N, set size to N
-SqrMatrix::SqrMatrix(const int N) {
+SqrMatrix::SqrMatrix(int N) {
     // Square Matrix of arrays (example from video lecture)
     size = N;
     sq = new int* [N];
