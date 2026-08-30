@@ -48,23 +48,22 @@ public:
      * @return Returns a new SqrMatrix.
      */
 
-    // this will be a mutation function
     SqrMatrix* operator * ( SqrMatrix* smPtrB);
 
     /**
-     * Description: //TODO Fill out what this description is
-     * @param i //TODO Fill out what this param is
-     * @return j //TODO Fill out what this
+     * Description: Accessor function; returns the value at row i and column j
+     * @param i row index, between 0 and N-1
+     * @param j column index, between 0 and N-1
+     * @return Returns the int stored at row i and column j
      */
-
-    // this will be a accessor function
     int getElement(int i, int j);
 
     /**
-     * Description: //TODO Fill out what this description is
-     * @param val //TODO Fill out what this param is
-     * @param i //TODO Fill out what this param is
-     * @return j //TODO Fill out what this
+     * Description: mutator function; stores the provided integer value (val) at row i, column j
+     * @param val integer to be inserted in the matrix
+     * @param i row index, between 0 and N-1
+     * @param j column index, between 0 and N-1
+     * @return nothing, this is void
      */
     void putElement(int val, int i, int j);
 
