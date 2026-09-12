@@ -9,6 +9,8 @@
 // Instead, use the scope resolution operator :: to prefix std to the method.
 // ex. std::cout
 
+// Constructor
+// Sequence is initialized with no parameters, head defaults to NULL and size to 0
 template <class T>
 Sequence<T>::Sequence ()
 {
@@ -16,6 +18,8 @@ Sequence<T>::Sequence ()
     size = 0;
 }
 
+// Deconstructor
+// Utilizes custom desconstructor that calls reclaimAllNodes()
 template <class T>
 Sequence<T>::~Sequence ()
 {
@@ -30,12 +34,14 @@ void Sequence<T>::clear ()
     size = 0;
 }
 
+// Destructor helper function
+// Recursive function that takes initalP as a pass by reference
 template <class T>
 void Sequence<T>::reclaimAllNodes (NodeRecord*& initialP)
 {
-    if (initialP != NULL) {
-        reclaimAllNodes(initialP->next);
-        delete (initialP);
+    if (initialP != NULL) { // if initialP is not NULL
+        reclaimAllNodes(initialP->next); // recursively calls itself with the pointer of the next element of the sequence
+        delete (initialP); // deletes node from memory and sets head to NULL
     }
 }
 
