@@ -70,7 +70,64 @@ Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
 
 template<class T>
 void Sequence<T>::add(T &x, int pos) {
-    // Todo: Add x at position pos
+    // TODO: Do we need to check if pos is valid?
+    // 0 <= pos <= length()
+
+    // Create new NodeRecord for with value x
+    NodeRecord* newNode = new NodeRecord;
+    newNode->value = x;
+
+    // Set newNode's next value to NULL as a default; update later if the node is not the first/last element
+    newNode->next = NULL;
+
+    // 0: cat, 1: dog, 2: fish size = 3
+    // add(bird, 3)
+    // last element is equal to the size, because size is 1 greater than the highest index value.
+
+    // Set next value
+    // If length is 0 or if the position is the last element, set next to NULL
+    // if (length() == 0 || pos == length()) {
+    //     newNode->next = NULL;
+    // }
+
+    // if position is the first element of an existing Sequence with 0 < size
+    if (pos == 0) {
+        newNode->next = head;
+        head = newNode;
+    }
+
+    // if position is in the middle of the existing Sequence
+    if (pos < length()) {
+        NodeRecord* current = head;
+        int i = 0;
+        while(i < pos-1) {
+            current = current->next;
+            i++;
+        }
+        // Set newNode's next value to the current element's next value
+        newNode->next = current->next;
+        // Set current element's value to the newNode
+        current->next = newNode;
+    }
+
+    // Increase size to reflect a new Node has joined the Sequence
+    ++size;
+
+    // Initial attempt, based on lecture--trying to simplify/clean this up.
+    // // If the head is null and length is 0
+    // if (length() == 0) {
+    //     head = x;
+    //     size = size++;
+    //     NodeRecord* newNode = new NodeRecord;
+    //     newNode->value = x;
+    //     newNode->next = NULL;
+    // }
+    //
+    // // If the length is greater than 0
+    // NodeRecord* newNode = new NodeRecord;
+    // newNode->value = x;
+    // newNode->next = NULL;
+
 }
 
 template<class T>
