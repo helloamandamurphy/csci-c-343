@@ -84,12 +84,6 @@ void Sequence<T>::add(T &x, int pos) {
     // add(bird, 3)
     // last element is equal to the size, because size is 1 greater than the highest index value.
 
-    // Set next value
-    // If length is 0 or if the position is the last element, set next to NULL
-    // if (length() == 0 || pos == length()) {
-    //     newNode->next = NULL;
-    // }
-
     // if position is the first element of an existing Sequence with 0 < size
     if (pos == 0) {
         newNode->next = head;
@@ -113,21 +107,6 @@ void Sequence<T>::add(T &x, int pos) {
     // Increase size to reflect a new Node has joined the Sequence
     ++size;
 
-    // Initial attempt, based on lecture--trying to simplify/clean this up.
-    // // If the head is null and length is 0
-    // if (length() == 0) {
-    //     head = x;
-    //     size = size++;
-    //     NodeRecord* newNode = new NodeRecord;
-    //     newNode->value = x;
-    //     newNode->next = NULL;
-    // }
-    //
-    // // If the length is greater than 0
-    // NodeRecord* newNode = new NodeRecord;
-    // newNode->value = x;
-    // newNode->next = NULL;
-
 }
 
 template<class T>
@@ -139,14 +118,18 @@ template<class T>
 std::optional<T> Sequence<T>::entry(int pos)  {
     NodeRecord* currentValue = head;
 
+    // if position is greater than size, return nullopt and exit
     if (pos >= size) {
         return std::nullopt;
     }
-    else {
-        // Todo: Take the value at pos and return it. You will need to replace the return here.
-        return std::nullopt;
-    }
 
+    // iterate up through the currentValue to the correct index to get the value
+    int i = 0;
+    while (i < pos) {
+        currentValue = currentValue->next;
+        i++;
+    }
+    return currentValue->value;
 }
 
 template<class T>
@@ -157,8 +140,11 @@ int Sequence<T>::length() {
 template<class T>
 std::string Sequence<T>::outputSequence() {
     std::stringstream ss;
-    //Todo: build a string(ss) with all the entries of the Sequence.
-    //Use insertion operator (<<) to build the string.
+    NodeRecord* current = head;
+    while (current != NULL) {
+        ss << current->value << " ";
+        current = current->next;
+    }
     return ss.str();
 
 }
