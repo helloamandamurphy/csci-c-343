@@ -64,7 +64,40 @@ void Sequence<T>::transferFrom(Sequence& source)
 
 template <class T>
 Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
-   // Todo: must return a Sequence.
+    // check if it's attempting to assign a sequence to itself
+    if (this == &rhs) {
+        return *this;
+    }
+
+    // Remove all values from current Sequence
+    reclaimAllNodes(head);
+    size = 0;
+
+    // If right hand side (rhs) has nodes, copy them over to current (left hand side)
+    if (rhs.head != NULL) {
+        head = new NodeRecord;
+        head->value = rhs.head->value;
+        head->next = NULL;
+        size++;
+
+        // Go through rest of nodes
+        NodeRecord* destination = head;
+        NodeRecord* source = rhs.head->next;
+
+        while (source != NULL) {
+            destination->next = new NodeRecord;
+            destination = destination->next;
+
+            destination->value = source->value;
+            destination->next = NULL;
+            size++;
+
+            source = source->next;
+        }
+    }
+
+    return *this;
+
 }
 
 
