@@ -1,5 +1,6 @@
 #include <iostream>
 #include "src/Sequence.cpp"
+#include <memory>
 int main() {
     // make seq
     auto seq = std::make_unique<Sequence<int>>();
@@ -22,7 +23,7 @@ int main() {
     std::string value4 = "dog";
 
     std::cout << "Sequence 1: " << seq1->outputSequence();
-    std::cout << "Entry 1: " << seq1->entry(1);
+    std::cout << "Entry 1: " << seq1->entry(1).value_or("(none)");
     std::cout << "Length: " << seq1->length();
 
 
@@ -61,8 +62,8 @@ int main() {
     seq4.add(v2, 1);
     seq5.add(v3, 2);
     seq5 = seq4; //this gives an error if the operator= is not implemented.
-    std::cout << "Sequence 4: " << seq4->outputSequence();
-    std::cout << "Sequence 5: " << seq5->outputSequence();
+    std::cout << "Sequence 4: " << seq4.outputSequence();
+    std::cout << "Sequence 5: " << seq5.outputSequence();
 
     return 0;
 }
