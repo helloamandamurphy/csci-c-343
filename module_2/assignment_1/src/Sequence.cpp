@@ -161,37 +161,48 @@ void Sequence<T>::remove(T &x, int pos) {
 
     // If the element is the only one in the Sequence, set the value to x and reclaimAllNodes()
     if (length() == 1) {
-        NodeRecord* one_item_seq = head;
-        reclaimAllNodes(one_item_seq);
+        x = head->value;
+        clear();
+        return;
     }
 
-    else {
-        NodeRecord* ahead = head;
+    NodeRecord* delete_node;
+    // if position = 0, set head to the next element
+    if (pos == 0) {
+        delete_node = head;
+        head = head->next;
+    } else {
+        NodeRecord* preceding = head;
 
-        // iterate to the position ahead of the remove position
+        // iterate to the position before the remove position
         int i = 0;
         while (i < pos-1) {
-            ahead = ahead->next;
+            preceding = preceding->next;
             i++;
         }
 
-        NodeRecord* delete_node = ahead->next;
+        // Set delete_node to the next item after ahead
+        delete_node = preceding->next;
+        // Set the preceding item's next to the delete_node's next
+        preceding->next = delete_node->next;
 
-        // If the delete node is the last item in the list, set the item ahead of it to NULL
-        if (delete_node->next == NULL) {
-            x = delete_node->value;
-            ahead->next = NULL;
-        } else {
-            // Set ahead's next value to the node behind the deleted node.
-            NodeRecord* behind = delete_node->next;
-            ahead->next = behind;
-        }
+        // // If the delete node is the last item in the list, set the item ahead of it to NULL
+        // if (delete_node->next == NULL) {
+        //     x = delete_node->value;
+        //     preceding->next = NULL;
+        // } else {
+        //     // Set ahead's next value to the node following the deleted node.
+        //     NodeRecord* following = delete_node->next;
+        //     preceding->next = following;
+        // }
 
         // Set delete_node to x
-        x = delete_node;
+        x = delete_node->value;
 
         // Delete the delete_node
         delete delete_node;
+
+        // TODO: removed is showing as 5 in main.cpp
 
     }
 

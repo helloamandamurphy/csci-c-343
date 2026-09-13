@@ -32,9 +32,11 @@ int main() {
     std::cout << "Length: " << seq1->length()<< std::endl; // exp: 4
 
     //test remove using seq1
-    int removed = 5; // I think this is a bug as well. According to the .h file, x expects a reference to the removed element
+    int removed = 5; // this value will be overwritten by whatever the removed value is
     seq->remove(removed, 0);
     std::cout << "Sequence after remove(): " << seq->outputSequence() << std::endl;
+    std::cout << "Removed: " << removed << std::endl;
+    std::cout << "Length: " << seq->length()<< std::endl;
 
     auto seq2 = std::make_unique<Sequence<int>>();
     auto seq3 = std::make_unique<Sequence<int>>();
