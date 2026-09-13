@@ -32,8 +32,9 @@ int main() {
     std::cout << "Length: " << seq1->length()<< std::endl; // exp: 4
 
     //test remove using seq1
-    int removed = 5;
+    int removed = 5; // I think this is a bug as well. According to the .h file, x expects a reference to the removed element
     seq->remove(removed, 0);
+    std::cout << "Sequence after remove(): " << seq->outputSequence() << std::endl;
 
     auto seq2 = std::make_unique<Sequence<int>>();
     auto seq3 = std::make_unique<Sequence<int>>();
@@ -59,6 +60,7 @@ int main() {
     //test equals operator with seq4 and seq5
     seq4.add(v1, 0);
     seq4.add(v2, 1);
+    // seq5.add(v3,2);
     seq5.add(v3, 0); // changed position 2 to position 0 because this was breaking things since seq5 was empty
     seq5 = seq4; //this gives an error if the operator= is not implemented.
     std::cout << "Sequence 4: " << seq4.outputSequence() << std::endl; // exp: 5 4

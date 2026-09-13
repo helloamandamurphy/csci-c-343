@@ -111,7 +111,6 @@ void Sequence<T>::add(T &x, int pos) {
     // Check if position is valid
     if (pos > length()) {
         std::cout << "Position out of bounds. Position=" + std::to_string(pos) + " is greater than Sequence size=" + std::to_string(size) << std::endl;
-        // return std::nullopt;
     }
 
     // Create new NodeRecord for with value x
@@ -128,13 +127,7 @@ void Sequence<T>::add(T &x, int pos) {
         head = newNode;
     }
 
-    // // if position is after the last element
-    // else if (pos == size) {
-    //     NodeRecord* current = head;
-    //
-    // }
-
-    // if position is in the middle of an existing Sequence
+    // if position is in an existing Sequence
     else if (pos <= length()) {
         NodeRecord* current = head;
         int i = 0;
@@ -160,6 +153,50 @@ void Sequence<T>::add(T &x, int pos) {
 template<class T>
 void Sequence<T>::remove(T &x, int pos) {
     // Todo: remove element at position pos and place it in x
+
+    // Check if position is valid
+    if (pos > length()-1) {
+        std::cout << "Cannot remove from a position that does not exist";
+    }
+
+    // If the element is the only one in the Sequence, set the value to x and reclaimAllNodes()
+    if (length() == 1) {
+        NodeRecord* one_item_seq = head;
+        reclaimAllNodes(one_item_seq);
+    }
+
+    else {
+        NodeRecord* ahead = head;
+
+        // iterate to the position ahead of the remove position
+        int i = 0;
+        while (i < pos-1) {
+            ahead = ahead->next;
+            i++;
+        }
+
+        NodeRecord* delete_node = ahead->next;
+
+        // If the delete node is the last item in the list, set the item ahead of it to NULL
+        if (delete_node->next == NULL) {
+            x = delete_node->value;
+            ahead->next = NULL;
+        } else {
+            // Set ahead's next value to the node behind the deleted node.
+            NodeRecord* behind = delete_node->next;
+            ahead->next = behind;
+        }
+
+        // Set delete_node to x
+        x = delete_node;
+
+        // Delete the delete_node
+        delete delete_node;
+
+    }
+
+    // Decrement size
+    --size;
 }
 
 template<class T>
