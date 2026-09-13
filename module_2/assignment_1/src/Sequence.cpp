@@ -103,28 +103,39 @@ Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
 
 template<class T>
 void Sequence<T>::add(T &x, int pos) {
-    // TODO: Do we need to check if pos is valid?
-    // 0 <= pos <= length()
+    // Example of an existing Sequence (thinking about size vs. pos)
+    // 0: cat, 1: dog, 2: fish , size = 3
+    // add(bird, 3)
+    // adding a new element to the end, pos is equal to the size, because size is 1 greater than the highest index value.
+
+    // Check if position is valid
+    if (pos > length()) {
+        std::cout << "Position out of bounds. Position=" + std::to_string(pos) + " is greater than Sequence size=" + std::to_string(size) << std::endl;
+        // return std::nullopt;
+    }
 
     // Create new NodeRecord for with value x
     NodeRecord* newNode = new NodeRecord;
     newNode->value = x;
 
-    // Set newNode's next value to NULL as a default; update later if the node is not the first/last element
+    // Set newNode's next value to NULL as a default;
+    // Set value of head later if the node is not the first in an empty Sequence or last element
     newNode->next = NULL;
 
-    // 0: cat, 1: dog, 2: fish size = 3
-    // add(bird, 3)
-    // last element is equal to the size, because size is 1 greater than the highest index value.
-
-    // if position is the first element of an existing Sequence with 0 < size
+    // if position is the first element of an existing Sequence with size > 0
     if (pos == 0) {
         newNode->next = head;
         head = newNode;
     }
 
-    // if position is in the middle of the existing Sequence
-    if (pos < length()) {
+    // // if position is after the last element
+    // else if (pos == size) {
+    //     NodeRecord* current = head;
+    //
+    // }
+
+    // if position is in the middle of an existing Sequence
+    else if (pos <= length()) {
         NodeRecord* current = head;
         int i = 0;
         while(i < pos-1) {
@@ -135,6 +146,10 @@ void Sequence<T>::add(T &x, int pos) {
         newNode->next = current->next;
         // Set current element's value to the newNode
         current->next = newNode;
+    }
+
+    else {
+        std::cout << "You're in the else loop." << std::endl;
     }
 
     // Increase size to reflect a new Node has joined the Sequence
