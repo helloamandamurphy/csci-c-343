@@ -3,11 +3,6 @@
 #include <optional>
 #include <string>
 #include <sstream>
-// !!!Do not use the following line!!!.
-//using namespace std;
-// This is a horrible practice and leads to invisible side effects.
-// Instead, use the scope resolution operator :: to prefix std to the method.
-// ex. std::cout
 
 // Constructor
 // Sequence is initialized with no parameters, head defaults to NULL and size to 0
@@ -26,6 +21,7 @@ Sequence<T>::~Sequence ()
     reclaimAllNodes(head);
 }
 
+// clear() utilizes reclaimAllNodes, but also sets head and size to their defaults of NULL and 0
 template <class T>
 void Sequence<T>::clear ()
 {
@@ -45,7 +41,7 @@ void Sequence<T>::reclaimAllNodes (NodeRecord*& initialP)
     }
 }
 
-
+// Transfers values from source to temp Sequence
 template <class T>
 void Sequence<T>::transferFrom(Sequence& source)
 {
@@ -62,6 +58,7 @@ void Sequence<T>::transferFrom(Sequence& source)
     source.clear();//clears source
 }
 
+// Overloaded operator that sets lhs to rhs
 template <class T>
 Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
     // check if it's attempting to assign a sequence to itself
@@ -78,7 +75,7 @@ Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
         head = new NodeRecord;
         head->value = rhs.head->value;
         head->next = NULL;
-        size++;
+        ++size;
 
         // Go through rest of nodes
         NodeRecord* destination = head;
@@ -90,7 +87,7 @@ Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
 
             destination->value = source->value;
             destination->next = NULL;
-            size++;
+            ++size;
 
             source = source->next;
         }
@@ -111,6 +108,7 @@ void Sequence<T>::add(T &x, int pos) {
     // Check if position is valid
     if (pos > length()) {
         std::cout << "Position out of bounds. Position=" + std::to_string(pos) + " is greater than Sequence size=" + std::to_string(size) << std::endl;
+        return;
     }
 
     // Create new NodeRecord for with value x
@@ -143,6 +141,7 @@ void Sequence<T>::add(T &x, int pos) {
 
     else {
         std::cout << "You're in the else loop." << std::endl;
+        return;
     }
 
     // Increase size to reflect a new Node has joined the Sequence
@@ -152,11 +151,11 @@ void Sequence<T>::add(T &x, int pos) {
 
 template<class T>
 void Sequence<T>::remove(T &x, int pos) {
-    // Todo: remove element at position pos and place it in x
 
     // Check if position is valid
     if (pos > length()-1) {
         std::cout << "Cannot remove from a position that does not exist";
+        return;
     }
 
     // If the element is the only one in the Sequence, set the value to x and reclaimAllNodes()
@@ -185,31 +184,19 @@ void Sequence<T>::remove(T &x, int pos) {
         delete_node = preceding->next;
         // Set the preceding item's next to the delete_node's next
         preceding->next = delete_node->next;
-
-        // // If the delete node is the last item in the list, set the item ahead of it to NULL
-        // if (delete_node->next == NULL) {
-        //     x = delete_node->value;
-        //     preceding->next = NULL;
-        // } else {
-        //     // Set ahead's next value to the node following the deleted node.
-        //     NodeRecord* following = delete_node->next;
-        //     preceding->next = following;
-        // }
-
-        // Set delete_node to x
-        x = delete_node->value;
-
-        // Delete the delete_node
-        delete delete_node;
-
-        // TODO: removed is showing as 5 in main.cpp
-
     }
+
+    // Set delete_node to x
+    x = delete_node->value;
+
+    // Delete the delete_node
+    delete delete_node;
 
     // Decrement size
     --size;
 }
 
+// Get value of position pos
 template<class T>
 std::optional<T> Sequence<T>::entry(int pos)  {
     NodeRecord* currentValue = head;
@@ -228,11 +215,13 @@ std::optional<T> Sequence<T>::entry(int pos)  {
     return currentValue->value;
 }
 
+// Get length/size of the Sequence
 template<class T>
 int Sequence<T>::length() {
     return size;
 }
 
+// Print out the values of the Sequence
 template<class T>
 std::string Sequence<T>::outputSequence() {
     std::stringstream ss;
