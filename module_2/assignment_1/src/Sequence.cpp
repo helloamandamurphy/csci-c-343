@@ -106,8 +106,8 @@ void Sequence<T>::add(T &x, int pos) {
     // adding a new element to the end, pos is equal to the size, because size is 1 greater than the highest index value.
 
     // Check if position is valid
-    if (pos > length()) {
-        std::cout << "Position out of bounds. Position=" + std::to_string(pos) + " is greater than Sequence size=" + std::to_string(size) << std::endl;
+    if (pos < 0 || pos > length()) {
+        std::cout << "Position out of bounds. Position=" + std::to_string(pos) + " is less than 0 or greater than Sequence size=" + std::to_string(size) << std::endl;
         return;
     }
 
@@ -153,7 +153,7 @@ template<class T>
 void Sequence<T>::remove(T &x, int pos) {
 
     // Check if position is valid
-    if (pos > length()-1) {
+    if (pos < 0 || pos > length()-1) {
         std::cout << "Cannot remove from a position that does not exist";
         return;
     }
@@ -202,7 +202,8 @@ std::optional<T> Sequence<T>::entry(int pos)  {
     NodeRecord* currentValue = head;
 
     // if position is greater than size, return nullopt and exit
-    if (pos >= size) {
+    if (pos < 0 || pos >= size ) {
+        std::cout << "Cannot retrieve value from a position that does not exist";
         return std::nullopt;
     }
 

@@ -13,7 +13,7 @@ int main() {
     seq->add(v2, 0);
     seq->add(v3, 0);
 
-    std::cout << "Sequence: " << seq->outputSequence() << std::endl; // exp: 37 29 52
+    std::cout << "Sequence: " << seq->outputSequence() << std::endl; // exp: 52 29 37
 
     // make seq1
     auto seq1 = std::make_unique<Sequence<std::string>>();
@@ -49,7 +49,7 @@ int main() {
     seq2->add(v2, 1);
     seq2->add(v3, 2);
     seq3->transferFrom(*seq2);
-    std::cout << "Sequence 2: " << seq2->outputSequence() << std::endl; // exp: 5 4 6
+    std::cout << "Sequence 2: " << seq2->outputSequence() << std::endl; // exp: (empty)
     std::cout << "Sequence 3: " << seq3->outputSequence() << std::endl; // exp: 5 4 6
 
     // make seq4 and seq5
