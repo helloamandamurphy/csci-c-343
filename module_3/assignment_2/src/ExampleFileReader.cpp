@@ -30,7 +30,7 @@ int convertSalaryStringToInt(string salaryString) {
 void doInputPersonDataFromFile(EmployeeSequence& personData)
 {
     EmployeeRecord r;
-    string filename = "data/EmployeeData.txt";
+    string filename = string(PROJECT_SOURCE_DIR) + "/data/EmployeeData.txt";
 
     // Open the filestream
     std::ifstream file(filename);
