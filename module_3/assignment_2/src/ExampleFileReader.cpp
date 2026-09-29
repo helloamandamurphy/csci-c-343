@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <vector>
 #include "Sequence.hpp"
 #include "EmployeeRecord.h"
 
@@ -88,7 +89,7 @@ int partition(std::vector<EmployeeRecord*>& arr, int low, int high) {
         // if salary is higher than the pivot, move it to the front
         if (arr[j]->annualSalary > pivot) {
             i++;
-            std::swap(arr[i], arr[j])
+            std::swap(arr[i], arr[j]);
         }
     }
 
@@ -100,11 +101,11 @@ int partition(std::vector<EmployeeRecord*>& arr, int low, int high) {
 // Quick sort
 void quickSort(std::vector<EmployeeRecord*>& arr, int low, int high) {
     if (low < high) {
-        int partion_index = partition(arr, low, high);
+        int partition_index = partition(arr, low, high);
 
         // Use recursion to sort elements before and after partition index
         quickSort(arr, low, partition_index -1);
-        quickSort(arr, parition_index + 1, high);
+        quickSort(arr, partition_index + 1, high);
     }
 }
 
@@ -144,7 +145,7 @@ int main(int argc, char* argv[])
     cout << "Reading EmployeeRecords from file" << endl;
     doInputPersonDataFromFile(eSequence);
     cout << "\nCompleted Reading, File contains following Employee Records" << endl;
-    eSequence.outputSequence();
+    sortAndDisplayEmployees(eSequence);
     cout<< endl;
 
     return 0;

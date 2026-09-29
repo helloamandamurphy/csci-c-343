@@ -29,6 +29,13 @@ public:
         return count;
     }
 
+    T& get(int index) {
+        if (index < 0 || index >= count) {
+            throw std::out_of_range("Index out of bounds.");
+        }
+        return data[index];
+    }
+
     // Add element x at position y, defaulting to position 0
     void add(T& element, int position = 0) {
         // Check if the count is larger than the size of the array
