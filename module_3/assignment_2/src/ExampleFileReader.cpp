@@ -43,6 +43,9 @@ void doInputPersonDataFromFile(EmployeeSequence& personData)
 
     string line;
 
+    // Skip column row
+    getline(file,line);
+
     // Read file line by line
     while (getline(file, line)) {
         // Make line a string stream
