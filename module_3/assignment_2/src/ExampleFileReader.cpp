@@ -29,11 +29,14 @@ void doInputPersonDataFromFile(EmployeeSequence& personData)
        infile>>dataSize;
        cout<<"Number of Records :"<< dataSize;
        for (int j = 0; j < dataSize; j++) {
+           infile>>r.eeid;
            infile>>r.name;
-           infile>>r.address;
-
-           infile>>r.state;
-           infile>>r.zip;
+           infile>>r.jobTitle;
+           infile>>r.department;
+           infile>>r.gender;
+           infile>>r.age;
+           infile>>r.annualSalary;
+           infile>>r.city;
 
            personData.add(r,0);
        } // end for

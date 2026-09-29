@@ -12,7 +12,7 @@
 template <class T>
 class Sequence {
     int count;
-    const int MAX_EMPLOYEES = 1001; // Array maximum set to the number of employees--1000 employees, adding 1 just in case
+    static const int MAX_EMPLOYEES = 1001; // Array maximum set to the number of employees--1000 employees, adding 1 just in case
     T data[MAX_EMPLOYEES]; // Create dynamic array with max size of 1001
 
 public:
