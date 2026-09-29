@@ -33,6 +33,6 @@ Turn in your programs, a screenshot of the first 100 records.
 - Screenshot first 100 records
 
 ## Planned Steps
-1. Review EmployeeRecord.h and update to support all 8 fields required
-2. Create custom Sequence.hpp file
+1. Review EmployeeRecord.h and update to support all 8 fields required (DONE)
+2. Create custom Sequence.hpp file (DONE) (TODO: Need to handle pointer/get())
 3. Create main.cpp file
