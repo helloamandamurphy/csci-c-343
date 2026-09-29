@@ -3,7 +3,10 @@
 // This code read EmployeeRecords from a text file into a Sequence, then output the data.
 
 #include <fstream>
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
 #include "Sequence.hpp"
 #include "EmployeeRecord.h"
 
@@ -11,38 +14,64 @@ using namespace std;
 
 typedef Sequence<EmployeeRecord> EmployeeSequence;
 
+int convertSalaryStringToInt(string salaryString) {
+    // Only return digits (no $ or , )
+    cout << "Input: " << salaryString << endl;
+
+    salaryString.erase(remove_if(salaryString.begin(), salaryString.end(), [](unsigned char c) {
+        return !std::isdigit(c);
+    }), salaryString.end());
+
+    int output = stoi(salaryString);
+    cout << "Output: " << output << endl;
+    return output;
+}
+
 void doInputPersonDataFromFile(EmployeeSequence& personData)
 {
-   string filename = "Employee.dat";
-   ifstream infile(filename);
-   EmployeeRecord r;
-   int dataSize;
+    EmployeeRecord r;
+    string filename = "data/EmployeeData.txt";
 
-    if (!infile) {
-        cout << "Unable to open file";
+    // Open the filestream
+    std::ifstream file(filename);
+
+    // Check if it opened successfully
+    if (!file.is_open()) {
+        std::cerr << "Unable to open file" << std::endl;
         exit(1); // terminate with error
     }
-   
-   if (infile.is_open()) {
-       // The first item in the data file is an integer
-       // it represents how many records are in the data file.
-       infile>>dataSize;
-       cout<<"Number of Records :"<< dataSize;
-       for (int j = 0; j < dataSize; j++) {
-           infile>>r.eeid;
-           infile>>r.name;
-           infile>>r.jobTitle;
-           infile>>r.department;
-           infile>>r.gender;
-           infile>>r.age;
-           infile>>r.annualSalary;
-           infile>>r.city;
 
-           personData.add(r,0);
-       } // end for
-       infile.close();
-        
-   } // end if
+    string line;
+
+    // Read file line by line
+    while (getline(file, line)) {
+        // Make line a string stream
+        string tab = "\t";
+        stringstream ss(line);
+        getline(ss, r.eeid, tab);
+        getline(ss, r.name, tab);
+        getline(ss, r.jobTitle, tab);
+        getline(ss, r.department, tab);
+        getline(ss, r.gender, tab);
+        getline(ss, r.city, tab);
+
+        // Handle age string -> int conversion
+        string ageString;
+        getline(ss, ageString, tab);
+        r.age = std::stoi(ageString);
+
+        // Handle salary string -> int conversion
+        string salaryString;
+        getline(ss, salaryString, tab);
+        int salaryInt = convertSalaryStringToInt(salaryString);
+        r.annualSalary = salaryInt;
+
+        personData.add(r,0);
+    }
+
+    file.close();
+
+    cout << "Number of Records :"<< personData.size();
 
  } // doInputPersonDataFromFile>
  
