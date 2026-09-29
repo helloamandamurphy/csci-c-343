@@ -19,7 +19,7 @@ class EmployeeRecord {
       string department;
       string gender;
       int age;
-      string annualSalary; // must convert to an int
+      int annualSalary; // must convert to an int
       string city;
       // Not used for this assignment
       // string address;
@@ -43,7 +43,7 @@ class EmployeeRecord {
          department="";
          gender="";
          age=0;
-         annualSalary="";
+         annualSalary=0;
          city="";
          // Not used for this assignment
          // address="" ;

@@ -46,14 +46,13 @@ void doInputPersonDataFromFile(EmployeeSequence& personData)
     // Read file line by line
     while (getline(file, line)) {
         // Make line a string stream
-        string tab = "\t";
+        char tab = '\t';
         stringstream ss(line);
         getline(ss, r.eeid, tab);
         getline(ss, r.name, tab);
         getline(ss, r.jobTitle, tab);
         getline(ss, r.department, tab);
         getline(ss, r.gender, tab);
-        getline(ss, r.city, tab);
 
         // Handle age string -> int conversion
         string ageString;
@@ -63,8 +62,10 @@ void doInputPersonDataFromFile(EmployeeSequence& personData)
         // Handle salary string -> int conversion
         string salaryString;
         getline(ss, salaryString, tab);
-        int salaryInt = convertSalaryStringToInt(salaryString);
-        r.annualSalary = salaryInt;
+        r.annualSalary = convertSalaryStringToInt(salaryString);
+
+        getline(ss, r.city, tab);
+
 
         personData.add(r,0);
     }
