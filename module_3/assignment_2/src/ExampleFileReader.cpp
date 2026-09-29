@@ -78,8 +78,63 @@ void doInputPersonDataFromFile(EmployeeSequence& personData)
     cout << "Number of Records :"<< personData.size();
 
  } // doInputPersonDataFromFile>
- 
 
+// helper for sort function
+int partition(std::vector<EmployeeRecord*>& arr, int low, int high) {
+    int pivot = arr[high]->annualSalary;
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        // if salary is higher than the pivot, move it to the front
+        if (arr[j]->annualSalary > pivot) {
+            i++;
+            std::swap(arr[i], arr[j])
+        }
+    }
+
+    // Put pivot in correct place
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+// Quick sort
+void quickSort(std::vector<EmployeeRecord*>& arr, int low, int high) {
+    if (low < high) {
+        int partion_index = partition(arr, low, high);
+
+        // Use recursion to sort elements before and after partition index
+        quickSort(arr, low, partition_index -1);
+        quickSort(arr, parition_index + 1, high);
+    }
+}
+
+void sortAndDisplayEmployees(EmployeeSequence& empSeq) {
+    // Create vector of EmployeeRecord pointers
+    std::vector<EmployeeRecord*> pointerVector;
+
+    // Add memory addresses from the Sequence to the vector
+    for (int i = 0; i < empSeq.size(); i++) {
+        pointerVector.push_back(&empSeq.get(i));
+    }
+
+    if (!pointerVector.empty()) {
+        quickSort(pointerVector, 0, pointerVector.size() - 1);
+    }
+
+    cout << "\n EMPLOYEES BY SALARY (DESCENDING)" << endl;
+
+    for (int i = 0; i < empSeq.size(); i++) {
+        cout << pointerVector[i]->annualSalary << " | "
+        << pointerVector[i]->eeid << " | "
+        << pointerVector[i]->name << " | "
+        << pointerVector[i]->jobTitle << " | "
+        << pointerVector[i]->department << " | "
+        << pointerVector[i]->gender << " | "
+        << pointerVector[i]->age << " | "
+        << pointerVector[i]->city << endl;
+    }
+
+}
 
 int main(int argc, char* argv[])
 {
