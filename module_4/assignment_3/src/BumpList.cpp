@@ -71,7 +71,16 @@ void BumpList<T>::replaceRightFront(T &x) {
 
 template<class T>
 void BumpList<T>::swapRights(BumpList &otherS) {
-    // TODO
+    // Return if swapping with self
+    if (this == &otherS) {
+        return;
+    }
+
+    // Create temporary Sequence to transfer right from
+    Sequence<T> temp;
+    temp.transferFrom(right); // lhs's right, otherS.right = rhs's right
+    right.transferFrom(otherS.right);
+    otherS.right.transferFrom(temp);
 }
 
 template<class T>

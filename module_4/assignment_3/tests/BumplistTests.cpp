@@ -275,6 +275,87 @@ TEST_CASE("REPLACE RIGHT FRONT: Left is unchanged") {
 }
 
 // SwapRights
+TEST_CASE("SWAP RIGHTS: Rights trade places, lefts stay") {
+    BumpList<int> one;
+    BumpList<int> two;
+    int a = 3, b = 2, c = 1;
+    int d = 6, e = 5, f = 4;
+
+    one.addRightFront(a);
+    one.addRightFront(b);
+    one.addRightFront(c);
+    one.advance(); // <1>, <2,3>
+
+    two.addRightFront(d);
+    two.addRightFront(e);
+    two.addRightFront(f); // <>, <4,5,6>
+
+    one.swapRights(two);
+
+    REQUIRE(one.leftLength() == 1);
+    REQUIRE(one.rightLength() == 3);
+    REQUIRE(one.rightFront() == 4);
+
+    REQUIRE(two.leftLength() == 0);
+    REQUIRE(two.rightLength() == 2);
+    REQUIRE(two.rightFront() == 2);
+}
+
+TEST_CASE("RIGHT SWAPS: Order is preserved") {
+    BumpList<int> one;
+    BumpList<int> two;
+    int a = 3, b = 2, c = 1;
+    int d = 6, e = 5, f = 4;
+
+    one.addRightFront(a);
+    one.addRightFront(b);
+    one.addRightFront(c);
+    one.advance(); // <1>, <2,3>
+
+    two.addRightFront(d);
+    two.addRightFront(e);
+    two.addRightFront(f); // <>, <4,5,6>
+
+    one.swapRights(two);
+
+    REQUIRE(one.leftLength() == 1);
+    REQUIRE(one.rightLength() == 3);
+    REQUIRE(one.rightFront() == 4);
+    one.advance();
+    REQUIRE(one.rightFront() == 5);
+    one.advance();
+    REQUIRE(one.rightFront() == 6);
+
+
+    REQUIRE(two.leftLength() == 0);
+    REQUIRE(two.rightLength() == 2);
+    REQUIRE(two.rightFront() == 2);
+    two.advance();
+    REQUIRE(two.rightFront() == 3);
+}
+
+TEST_CASE("SWAP RIGHTS: Swapping itself doesn't change anything") {
+    BumpList<int> one;
+    int a = 3;
+    one.addRightFront(a);
+    one.swapRights(one);
+    REQUIRE(one.rightLength() == 1);
+    REQUIRE(one.rightFront() == 3);
+}
+
+TEST_CASE("SWAP RIGHTS: Can swap with empty right") {
+    BumpList<int> one;
+    BumpList<int> two;
+
+    int a = 3;
+    one.addRightFront(a);
+
+    one.swapRights(two);
+    REQUIRE(one.rightLength() == 0);
+    REQUIRE(two.rightLength() == 1);
+    REQUIRE(two.rightFront() == 3);
+}
+
 
 // LeftLength
 TEST_CASE("LEFT LENGTH: Left initializes at zero") {
