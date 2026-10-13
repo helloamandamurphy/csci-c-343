@@ -24,4 +24,11 @@ Running tests:
 cmake -S . -B cmake-build-debug
 cmake --build cmake-build-debug
 ctest --test-dir cmake-build-debug --output-on-failure
+
+./cmake-build-debug/BumpListTests --success
+
 ```
+
+## Note from Amanda
+Submitting partially and will resubmit with the rest of the assignment later tonight
+Submitting in the event I don't get back in time to finish it.
