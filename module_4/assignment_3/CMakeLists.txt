@@ -33,5 +33,10 @@ add_executable(BumpListTests tests/BumplistTests.cpp
 )
 target_include_directories(BumpListTests PRIVATE src)
 target_link_libraries(BumpListTests PRIVATE Catch2::Catch2WithMain)
+
+# Sanitizer flags for testing deconstructor
+target_compile_options(BumpListTests PRIVATE -fsanitize=address -g)
+target_link_options(BumpListTests PRIVATE -fsanitize=address)
+
 add_test(NAME BumpListTests COMMAND BumpListTests)
 
