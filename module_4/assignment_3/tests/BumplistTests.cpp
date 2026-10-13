@@ -112,6 +112,52 @@ TEST_CASE("ADD RIGHT FRONT: doesn't change left") {
 }
 
 // RemoveRightFront
+TEST_CASE("REMOVE RIGHT FRONT: Fails when right is <>") {
+    BumpList<int> list;
+    int x = 23;
+    REQUIRE_THROWS_AS(list.removeRightFront(x), std::out_of_range);
+    REQUIRE(x == 23); // still here after failure
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 0);
+}
+
+TEST_CASE("REMOVE RIGHT FRONT: Removes front element from right and returns it") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c); // <>, <1,2,3>
+    int x = 0;
+    list.removeRightFront(x); // <>, <2,3>
+    REQUIRE(x == 1);
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 2);
+    REQUIRE(list.rightFront() == 2);
+}
+
+TEST_CASE("REMOVE RIGHT FRONT: Removing only element leaves right empty") {
+    BumpList<int> list;
+    int a = 3;
+    int x = 0;
+
+    list.addRightFront(a);
+    REQUIRE(list.rightLength() == 1);
+    list.removeRightFront(x);
+    REQUIRE(x == 3);
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 0);
+    REQUIRE(list.rightFront() == std::nullopt);
+}
+
+TEST_CASE("REMOVE RIGHT FRONT: Overwrites value of x with removed value") {
+    BumpList<int> list;
+    int a = 3;
+    int x = 0;
+
+    list.addRightFront(a);
+    list.removeRightFront(x);
+    REQUIRE(x == 3);
+}
 
 // ReplaceRightFront
 

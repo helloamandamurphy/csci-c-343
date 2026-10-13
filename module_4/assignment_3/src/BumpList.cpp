@@ -50,6 +50,9 @@ void BumpList<T>::addRightFront(T &x) {
 
 template<class T>
 void BumpList<T>::removeRightFront(T &x) {
+    if (right.length() == 0) {
+        throw std::out_of_range("BumpList<T>::removeRightFront() called on empty right");
+    }
     right.remove(x,0);
 }
 
