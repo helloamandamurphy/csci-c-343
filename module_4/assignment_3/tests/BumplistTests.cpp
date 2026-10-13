@@ -160,6 +160,51 @@ TEST_CASE("REMOVE RIGHT FRONT: Overwrites value of x with removed value") {
 }
 
 // ReplaceRightFront
+TEST_CASE("REPLACE RIGHT FRONT: Fails when right is <>") {
+    BumpList<int> list;
+    int x = 23;
+    REQUIRE_THROWS_AS(list.replaceRightFront(x), std::out_of_range);
+    REQUIRE(x == 23);
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 0);
+}
+
+TEST_CASE("REPLACE RIGHT FRONT: New value becomes front and x gets the old front value") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c); // <>, <1,2,3>
+    int x = 23;
+    list.replaceRightFront(x);
+    REQUIRE(list.rightFront() == 23);
+    REQUIRE(x == 1);
+}
+
+TEST_CASE("REPLACE RIGHT FRONT: Works when rightLength == 1") {
+    BumpList<int> list;
+    int a = 3;
+    int x = 23;
+    list.addRightFront(a);
+    list.replaceRightFront(x);
+    REQUIRE(list.rightFront() == 23);
+    REQUIRE(x == 3);
+}
+
+TEST_CASE("REPLACE RIGHT FRONT: Left is unchanged") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c); // <>, <1,2,3>
+    list.advance(); // <1>, <2,3>
+    int x = 23;
+    list.replaceRightFront(x); // <1>, <23,3>
+    REQUIRE(list.rightFront() == 23);
+    REQUIRE(x == 2);
+    REQUIRE(list.leftLength() == 1);
+    REQUIRE(list.rightLength() == 2);
+}
 
 // SwapRights
 
