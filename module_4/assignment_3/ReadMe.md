@@ -18,3 +18,10 @@ You should replace the code in Sequence.cpp with the correct code you implemente
 You must write meaningful unit tests to test BumpList functions. Failure to implement your own meaningful unit tests will result in a 20% deduction.
 
 
+# Amanda Notes
+Running tests: 
+```bash
+cmake -S . -B cmake-build-debug
+cmake --build cmake-build-debug
+ctest --test-dir cmake-build-debug --output-on-failure
+```

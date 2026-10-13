@@ -1,11 +1,14 @@
 #include "BumpList.h"
 
+// Constructor default
 template<class T>
 BumpList<T>::BumpList() = default;
 
+// Deconstructor default
 template<class T>
 BumpList<T>::~BumpList() = default;
 
+// Clear both sides
 template<class T>
 void BumpList<T>::clear() {
 

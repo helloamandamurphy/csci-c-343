@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(Prg_1 main.cpp
         src/Sequence.h
         src/BumpList.h
-        src/BumpList.cpp)
+#        src/BumpList.cpp # was getting redefinition errors after adding #include BumpList.cpp to the end of the Bumplist.h file
+)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -20,7 +21,17 @@ enable_testing()
 add_executable(SequenceTests tests/SequenceTests.cpp
         src/Sequence.h
         src/BumpList.h
-        src/BumpList.cpp
+#        src/BumpList.cpp # was getting redefinition errors after adding #include BumpList.cpp to the end of the Bumplist.h file
 )
 target_link_libraries(SequenceTests PRIVATE Catch2::Catch2WithMain)
 add_test(NAME SequenceTests COMMAND SequenceTests)
+
+# Add executable specifically for BumpList tests
+add_executable(BumpListTests tests/BumplistTests.cpp
+        src/Sequence.h
+        src/BumpList.h
+)
+target_include_directories(BumpListTests PRIVATE src)
+target_link_libraries(BumpListTests PRIVATE Catch2::Catch2WithMain)
+add_test(NAME BumpListTests COMMAND BumpListTests)
+

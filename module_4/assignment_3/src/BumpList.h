@@ -165,4 +165,7 @@ private: // representation
     Sequence<T> left;
     int size = 0;
 };
+
+#include "BumpList.cpp" // fixes linker command issue
+
 #endif

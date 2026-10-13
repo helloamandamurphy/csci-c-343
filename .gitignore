@@ -9,3 +9,4 @@ hello_world
 
 # Build directories used for CMake
 build/
+cmake-build-debug/

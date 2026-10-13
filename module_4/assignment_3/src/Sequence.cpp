@@ -3,6 +3,7 @@
 #include <optional>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 // Constructor
 // Sequence is initialized with no parameters, head defaults to NULL and size to 0
@@ -228,7 +229,7 @@ std::string Sequence<T>::outputSequence() {
     std::stringstream ss;
     NodeRecord* current = head;
     while (current != NULL) {
-        ss << current->value << " ";
+        ss << current->value << ", ";
         current = current->next;
     }
     return ss.str();
