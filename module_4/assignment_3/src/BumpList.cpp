@@ -108,8 +108,7 @@ std::optional<int> BumpList<T>::find(T elementToFind) {
 
 template<class T>
 std::string BumpList<T>::outputBumpList() {
-   // TODO
-    return "";
+   return "<" + left.outputSequence() + ">, <" + right.outputSequence() + ">";
 }
 
 

@@ -141,10 +141,13 @@ TEST_CASE("ADVANCE: Total size remains the same") {
     REQUIRE(originalTotal == endingTotal);
 }
 // Operator=
+// TODO
 
 // MoveToStart
+// TODO
 
 // MoveToFinish
+// TODO
 
 // AddRightFront
 TEST_CASE("ADD RIGHT FRONT: adds a new element to the list") {
@@ -433,6 +436,8 @@ TEST_CASE("RIGHT FRONT: Doesn't change length or values") {
 
 
 // Find
+// TODO
 
 //OutputBumpList
+// TODO 
 
