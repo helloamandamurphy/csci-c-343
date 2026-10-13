@@ -22,6 +22,9 @@ void BumpList<T>::transferFrom(BumpList &source) {
 
 template<class T>
 void BumpList<T>::advance() {
+    if (right.length() == 0) {
+        throw std::out_of_range("BumpList<T>::advance() called on empty right");
+    }
     T x;
     right.remove(x, 0);
     left.add(x, left.length());
@@ -47,14 +50,16 @@ void BumpList<T>::addRightFront(T &x) {
 
 template<class T>
 void BumpList<T>::removeRightFront(T &x) {
-    // TODO
+    right.remove(x,0);
 }
-
 
 
 template<class T>
 void BumpList<T>::replaceRightFront(T &x) {
-    // TODO
+    T startingFront;
+    right.remove(startingFront, 0);
+    right.add(x,0);
+    x = startingFront;
 }
 
 template<class T>
@@ -75,7 +80,7 @@ int BumpList<T>::rightLength() {
 
 template<class T>
 std::optional<T> BumpList<T>::rightFront() {
-    return std::optional<T>();
+    return right.entry(0);
 }
 
 template<class T>
