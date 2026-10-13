@@ -86,12 +86,14 @@ std::optional<T> BumpList<T>::rightFront() {
 template<class T>
 std::optional<int> BumpList<T>::find(T elementToFind) {
     auto t =  new std::optional<int>();
+    // TODO
     return *t;
 }
 
 template<class T>
 std::string BumpList<T>::outputBumpList() {
-   return "";
+   // TODO
+    return "";
 }
 
 
