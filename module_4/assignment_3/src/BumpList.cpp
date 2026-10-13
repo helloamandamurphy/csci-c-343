@@ -17,7 +17,8 @@ void BumpList<T>::clear() {
 
 template<class T>
 void BumpList<T>::transferFrom(BumpList &source) {
-    // TODO
+    left.transferFrom(source.left);
+    right.transferFrom(source.right);
 }
 
 template<class T>

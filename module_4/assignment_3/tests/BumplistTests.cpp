@@ -38,6 +38,74 @@ TEST_CASE("CLEAR: clears all of the elements in the the data structure") {
 }
 
 // TransferFrom
+TEST_CASE("TRANSFER FROM: Gets source's left and right and clears source") {
+    BumpList<int> source, self;
+    int a = 3, b = 2, c = 1;
+    source.addRightFront(a);
+    source.addRightFront(b);
+    source.addRightFront(c);
+    source.advance();
+
+    self.transferFrom(source);
+
+    REQUIRE(self.leftLength() == 1);
+    REQUIRE(self.rightLength() == 2);
+    REQUIRE(self.rightFront() == 2);
+    REQUIRE(source.leftLength() == 0);
+    REQUIRE(source.rightLength() == 0);
+}
+
+TEST_CASE("TRANSFER FROM: Empty source empties itself") {
+    BumpList<int> source, self;
+    int a = 5;
+    self.addRightFront(a);
+    self.transferFrom(source);
+
+    REQUIRE(self.leftLength() == 0);
+    REQUIRE(self.rightLength() == 0);
+    REQUIRE(source.leftLength() == 0);
+    REQUIRE(source.rightLength() == 0);
+}
+
+TEST_CASE("TRANSFER FROM: Source can be used after transfer") {
+    BumpList<int> source, self;
+    int a = 3, b = 2, c = 1;
+    source.addRightFront(a);
+    source.addRightFront(b);
+    source.addRightFront(c);
+    source.advance();
+
+    self.transferFrom(source);
+
+    source.addRightFront(a);
+
+    REQUIRE(source.rightLength() == 1);
+    REQUIRE(source.leftLength() == 0);
+    REQUIRE(source.rightFront() == 3);
+}
+
+TEST_CASE("TRANSFER FROM: Self's previous contents are replaced") {
+    BumpList<int> source, self;
+    int a = 3, b = 2, c = 1;
+    int d = 6, e = 5, f = 4;
+
+    self.addRightFront(a);
+    self.addRightFront(b);
+    self.addRightFront(c);
+
+    source.addRightFront(d);
+    source.addRightFront(e);
+    source.addRightFront(f);
+
+    self.transferFrom(source);
+
+    REQUIRE(self.rightFront == 4);
+    self.advance();
+    REQUIRE(self.rightFront == 5);
+    self.advance();
+    REQUIRE(self.rightFront == 6);
+
+}
 
 // Advance
 TEST_CASE("ADVANCE: Fails when right is <>") {
