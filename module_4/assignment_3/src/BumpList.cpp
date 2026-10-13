@@ -11,17 +11,20 @@ BumpList<T>::~BumpList() = default;
 // Clear both sides
 template<class T>
 void BumpList<T>::clear() {
-
+    right.clear();
+    left.clear();
 }
 
 template<class T>
 void BumpList<T>::transferFrom(BumpList &source) {
-
+    // TODO
 }
 
 template<class T>
 void BumpList<T>::advance() {
-
+    T x;
+    right.remove(x, 0);
+    left.add(x, left.length());
 }
 
 template<class T>
@@ -29,44 +32,44 @@ BumpList<T>& BumpList<T>::operator=(BumpList const& rhs) = default;
 
 template<class T>
 void BumpList<T>::moveToStart() {
-
+    // TODO
 }
 
 template<class T>
 void BumpList<T>::moveToFinish() {
-
+    // TODO
 }
 
 template<class T>
 void BumpList<T>::addRightFront(T &x) {
-
+    right.add(x,0);
 }
 
 template<class T>
 void BumpList<T>::removeRightFront(T &x) {
-
+    // TODO
 }
 
 
 
 template<class T>
 void BumpList<T>::replaceRightFront(T &x) {
-
+    // TODO
 }
 
 template<class T>
 void BumpList<T>::swapRights(BumpList &otherS) {
-
+    // TODO
 }
 
 template<class T>
 int BumpList<T>::leftLength() {
-   return 0;
+    return left.length();
 }
 
 template<class T>
 int BumpList<T>::rightLength() {
-   return 0;
+    return right.length();
 }
 
 
