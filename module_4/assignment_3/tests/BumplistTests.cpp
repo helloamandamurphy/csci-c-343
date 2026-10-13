@@ -79,6 +79,37 @@ TEST_CASE("ADVANCE: Total size remains the same") {
 // MoveToFinish
 
 // AddRightFront
+TEST_CASE("ADD RIGHT FRONT: adds a new element to the list") {
+    BumpList<int> list;
+    int a = 3;
+    list.addRightFront(a);
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 1);
+    REQUIRE(list.rightFront() == 3);
+}
+
+TEST_CASE("ADD RIGHT FRONT: new element goes in the front of existing elements") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    REQUIRE(list.rightFront() == 3);
+    list.addRightFront(b);
+    REQUIRE(list.rightFront() == 2);
+    list.addRightFront(c);
+    REQUIRE(list.rightFront() == 1);
+}
+
+TEST_CASE("ADD RIGHT FRONT: doesn't change left") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.advance();
+    list.addRightFront(c);
+    REQUIRE(list.leftLength() == 1);
+    REQUIRE(list.rightLength() == 2);
+    REQUIRE(list.rightFront() == 1);
+}
 
 // RemoveRightFront
 
