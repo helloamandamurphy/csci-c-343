@@ -99,11 +99,11 @@ TEST_CASE("TRANSFER FROM: Self's previous contents are replaced") {
 
     self.transferFrom(source);
 
-    REQUIRE(self.rightFront == 4);
+    REQUIRE(self.rightFront() == 4);
     self.advance();
-    REQUIRE(self.rightFront == 5);
+    REQUIRE(self.rightFront() == 5);
     self.advance();
-    REQUIRE(self.rightFront == 6);
+    REQUIRE(self.rightFront() == 6);
 
 }
 
