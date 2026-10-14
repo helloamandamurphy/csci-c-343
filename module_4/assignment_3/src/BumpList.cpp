@@ -101,9 +101,22 @@ std::optional<T> BumpList<T>::rightFront() {
 
 template<class T>
 std::optional<int> BumpList<T>::find(T elementToFind) {
-    auto t =  new std::optional<int>();
-    // TODO
-    return *t;
+    // Check left side using .entry()
+    for (int i = 0; i < left.length(); i++) {
+        if (left.entry(i) == elementToFind) {
+            return i;
+        }
+    }
+    // Check right using .entry()
+    for (int i = 0; i < right.length(); i++) {
+        if (right.entry(i) == elementToFind) {
+            // return the position from the left (left length + right index)
+            return left.length() + i;
+        }
+    }
+
+    // if it's not in either, return a nullopt
+    return std::nullopt;
 }
 
 template<class T>
