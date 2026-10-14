@@ -140,8 +140,48 @@ TEST_CASE("ADVANCE: Total size remains the same") {
     int endingTotal = list.leftLength() + list.rightLength();
     REQUIRE(originalTotal == endingTotal);
 }
+
 // Operator=
-// TODO
+TEST_CASE("OPERATOR=: Copies left and right") {
+    BumpList<int> source;
+    BumpList<int> copy;
+    int a = 3, b = 2, c = 1;
+    source.addRightFront(a);
+    source.addRightFront(b);
+    source.addRightFront(c);
+
+    copy = source;
+    REQUIRE(copy.outputBumpList() == "<>, <1, 2, 3, >")
+}
+
+TEST_CASE("OPERATOR=: Source is unchanged") {
+    BumpList<int> source;
+    BumpList<int> copy;
+    int a = 3, b = 2, c = 1;
+    source.addRightFront(a);
+    source.addRightFront(b);
+    source.addRightFront(c);
+
+    copy = source;
+    REQUIRE(source.outputBumpList() == "<>, <1, 2, 3, >")
+}
+
+TEST_CASE("OPERATOR=: Source is empty and replaces existing values of copy") {
+    BumpList<int> source;
+    BumpList<int> copy;
+    int a = 3, b = 2, c = 1;
+    copy.addRightFront(a);
+    copy.addRightFront(b);
+    copy.addRightFront(c);
+
+    REQUIRE(source.rightLength() == 0);
+    REQUIRE(source.leftLength() == 0);
+
+    copy = source;
+
+    REQUIRE(copy.rightLength() == 0);
+    REQUIRE(copy.leftLength() == 0);
+}
 
 // MoveToStart
 TEST_CASE("MOVE TO START: Empty BumpList") {
