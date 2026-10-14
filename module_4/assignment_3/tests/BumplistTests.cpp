@@ -439,5 +439,39 @@ TEST_CASE("RIGHT FRONT: Doesn't change length or values") {
 // TODO
 
 //OutputBumpList
-// TODO 
+TEST_CASE("OUTPUT: Right empty, elements in left") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance();
+    list.advance();
+    list.advance();
+    REQUIRE(list.outputBumpList() == "<1, 2, 3, >, <>");
 
+
+}
+TEST_CASE("OUTPUT: Left empty, elements in right") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    REQUIRE(list.outputBumpList() == "<>, <1, 2, 3, >");
+}
+
+TEST_CASE("OUTPUT: Elements in both") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance();
+    REQUIRE(list.outputBumpList() == "<1, >, <2, 3, >");
+}
+
+TEST_CASE("OUTPUT: Both empty") {
+    BumpList<int> list;
+    REQUIRE(list.outputBumpList() == "<>, <>");
+}
