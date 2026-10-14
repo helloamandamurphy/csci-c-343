@@ -36,7 +36,13 @@ BumpList<T>& BumpList<T>::operator=(BumpList const& rhs) = default;
 
 template<class T>
 void BumpList<T>::moveToStart() {
-    // TODO
+    // while left length is greater than 0
+    while (left.length() > 0) {
+        T x;
+        // Remove each element from the end of left into the beginning of right
+        left.remove(x,left.length() - 1);
+        right.add(x,0);
+    }
 }
 
 template<class T>
