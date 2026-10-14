@@ -436,7 +436,51 @@ TEST_CASE("RIGHT FRONT: Doesn't change length or values") {
 
 
 // Find
-// TODO
+TEST_CASE("FIND: Fails and returns nullopt if BumpList is empty") {
+    BumpList<int> list;
+    REQUIRE(list.find(1) == std::nullopt);
+}
+
+TEST_CASE("FIND: Returns nullopt if value is not present") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance();
+    REQUIRE(list.find(23) == std::nullopt);
+}
+
+TEST_CASE("FIND: Finds value in left") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance(); // <1>, <2,3>
+    REQUIRE(list.find(1) == 0);
+}
+
+TEST_CASE("FIND: Finds value in right and returns left length + right index") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance(); // <1>, <2,3>
+    REQUIRE(list.find(3) == 2);
+}
+
+TEST_CASE("FIND: Returns first time the number occurs") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+    list.advance();
+    list.addRightFront(c); // <1>, <1,2,3>
+    REQUIRE(list.find(1) == 0);
+}
 
 //OutputBumpList
 TEST_CASE("OUTPUT: Right empty, elements in left") {
