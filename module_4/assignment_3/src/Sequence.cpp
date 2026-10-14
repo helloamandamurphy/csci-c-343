@@ -69,6 +69,7 @@ Sequence<T>& Sequence<T>::operator=(const Sequence& rhs) {
 
     // Remove all values from current Sequence
     reclaimAllNodes(head);
+    head = NULL;
     size = 0;
 
     // If right hand side (rhs) has nodes, copy them over to current (left hand side)
