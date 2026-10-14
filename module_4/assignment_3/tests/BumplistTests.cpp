@@ -144,10 +144,51 @@ TEST_CASE("ADVANCE: Total size remains the same") {
 // TODO
 
 // MoveToStart
-// TODO
+TEST_CASE("MOVE TO START: Empty BumpList") {
+    BumpList<int> list;
+    list.moveToStart();
+    REQUIRE(list.outputBumpList() == "<>, <>");
+}
+
+TEST_CASE("MOVE TO START: Left has elements that move") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c); // <>, <1,2,3>
+    list.advance();
+    list.advance();
+
+    list.moveToStart();
+
+    REQUIRE(list.leftLength() == 0);
+    REQUIRE(list.rightLength() == 3);
+    REQUIRE(list.outputBumpList() == "<>, <1, 2, 3, >");
+}
+
+// TODO: Add more if time
 
 // MoveToFinish
-// TODO
+TEST_CASE("MOVE TO FINISH: Empty BumpList") {
+    BumpList<int> list;
+    list.moveToFinish();
+    REQUIRE(list.outputBumpList() == "<>, <>");
+}
+
+TEST_CASE("MOVE TO FINISH: Elements in right that move to left") {
+    BumpList<int> list;
+    int a = 3, b = 2, c = 1;
+    list.addRightFront(a);
+    list.addRightFront(b);
+    list.addRightFront(c);
+
+    list.moveToFinish();
+    REQUIRE(list.leftLength() == 3);
+    REQUIRE(list.rightLength() == 0);
+    REQUIRE(list.outputBumpList() == "<1, 2, 3, >, <>");
+}
+
+// TODO: add more if time
 
 // AddRightFront
 TEST_CASE("ADD RIGHT FRONT: adds a new element to the list") {
