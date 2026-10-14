@@ -151,7 +151,7 @@ TEST_CASE("OPERATOR=: Copies left and right") {
     source.addRightFront(c);
 
     copy = source;
-    REQUIRE(copy.outputBumpList() == "<>, <1, 2, 3, >")
+    REQUIRE(copy.outputBumpList() == "<>, <1, 2, 3, >");
 }
 
 TEST_CASE("OPERATOR=: Source is unchanged") {
@@ -163,7 +163,7 @@ TEST_CASE("OPERATOR=: Source is unchanged") {
     source.addRightFront(c);
 
     copy = source;
-    REQUIRE(source.outputBumpList() == "<>, <1, 2, 3, >")
+    REQUIRE(source.outputBumpList() == "<>, <1, 2, 3, >");
 }
 
 TEST_CASE("OPERATOR=: Source is empty and replaces existing values of copy") {
