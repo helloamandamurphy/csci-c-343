@@ -47,7 +47,7 @@ void BumpList<T>::moveToStart() {
 
 template<class T>
 void BumpList<T>::moveToFinish() {
-    while (left.length() > 0) {
+    while (right.length() > 0) {
         advance();
     }
 }
