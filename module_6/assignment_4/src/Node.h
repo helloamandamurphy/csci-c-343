@@ -2,8 +2,8 @@
 // Created by Amanda Murphy on 10/31/26.
 //
 
-#ifndef UNTITLED_NODE_H
-#define UNTITLED_NODE_H
+#ifndef ASSIGNMENT_4_NODE_H
+#define ASSIGNMENT_4_NODE_H
 #pragma once
 #include <string>
 
@@ -19,4 +19,4 @@ struct Node {
     }
 };
 
-#endif //UNTITLED_NODE_H
+#endif //ASSIGNMENT_4_NODE_H

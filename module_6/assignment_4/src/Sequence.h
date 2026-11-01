@@ -2,8 +2,8 @@
 // Created by Amanda Murphy on 10/31/26.
 //
 
-#ifndef UNTITLED_SEQUENCE_H
-#define UNTITLED_SEQUENCE_H
+#ifndef ASSIGNMENT_4_SEQUENCE_H
+#define ASSIGNMENT_4_SEQUENCE_H
 #pragma once
 #include <string>
 #include "Node.h"
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //UNTITLED_SEQUENCE_H
+#endif //ASSIGNMENT_4_SEQUENCE_H
