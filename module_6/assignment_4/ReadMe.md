@@ -62,3 +62,14 @@ Acceptable results (you may not get the same results, but a variance of a few th
 - Sequence class needs one function to search for a word + return the number of comparisons to find/not find the word
 
 Thoughts it may help to map A -> 0, B ->1, C-> 2, etc. for the first letter of the word (what we are doing for the dictionary), but creating subarrays for the second letter, third letter, etc. would limit the number of words to compare.
+
+## Always forget this, so writing it down: 
+```bash
+mkdir build
+cd build
+
+cmake ..
+cmake --build .
+
+./assignment_4
+```
