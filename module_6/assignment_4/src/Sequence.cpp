@@ -27,3 +27,22 @@ Sequence::~Sequence() {
 int Sequence::getLength() const {
     return length;
 }
+
+void Sequence::add(const std::string& word) {
+    // make new linked list node with the new word
+    Node* newNode = new Node(word);
+
+    // if the Sequence is empty (header is a nullptr), then set head/tail to newNode
+    if (head == nullptr) {
+        head = newNode;
+        tail = newNode;
+    }
+    // otherwise set the tail node's next value to the pointer to newNode
+    // and set tail to the newNode
+    else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+
+    length++;
+}

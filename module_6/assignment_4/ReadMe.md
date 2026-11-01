@@ -73,3 +73,20 @@ cmake --build .
 
 ./assignment_4
 ```
+
+## Lessons Learned
+* You can't pass string literals directly into a function, because string literals are temporary values (rvalues), so non-const values have to be set to an lvalue first. 
+Ex: 
+```c++
+// Signature with const
+void Sequence::add(const std::string& word) {} // note const
+seq.add("cat");
+
+// Signature without const
+void Sequence::add(std::string& word) {} // note, no const
+std::string cat = "cat"; // setting string literal (rvalue) to an lvalue
+seq.add(cat); // passing the new lvalue as a parameter
+seq.add("cat"); // this fails
+```
+
+* main.cpp needs to import Sequence.h, not Sequence.cpp

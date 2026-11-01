@@ -23,6 +23,8 @@ public:
     // Get Length
     int getLength() const;
 
+    void add(const std::string& word); // see note on const in ReadMe under Lessons Learned
+
     //TODO: Additional functions
 };
 
