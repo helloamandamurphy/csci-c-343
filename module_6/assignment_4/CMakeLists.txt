@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(assignment_4 main.cpp
         src/Sequence.cpp
         src/Sequence.h
-        src/Node.h)
+        src/Node.h
+        src/WordParser.cpp
+        src/WordParser.h)
