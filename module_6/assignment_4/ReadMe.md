@@ -90,3 +90,4 @@ seq.add("cat"); // this fails
 ```
 
 * main.cpp needs to import Sequence.h, not Sequence.cpp
+* It's better practice to have openFile return a boolean so we can check it/send an error message if opening it doesn't work.

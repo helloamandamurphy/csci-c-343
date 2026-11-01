@@ -17,10 +17,11 @@ public:
     // Deconstructor
     ~WordParser();
 
-    // TODO: open file
+    // open a file
+    bool openFile(const std::string& filename);
 
-    // TODO: close file
-
+    // close a file
+    void closeFile();
 };
 
 
