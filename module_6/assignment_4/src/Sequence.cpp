@@ -23,3 +23,7 @@ Sequence::~Sequence() {
     head = nullptr;
     tail = nullptr;
 }
+
+int Sequence::getLength() const {
+    return length;
+}

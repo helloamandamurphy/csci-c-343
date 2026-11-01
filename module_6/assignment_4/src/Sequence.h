@@ -20,6 +20,9 @@ public:
     // Deconstructor
     ~Sequence();
 
+    // Get Length
+    int getLength() const;
+
     //TODO: Additional functions
 };
 
