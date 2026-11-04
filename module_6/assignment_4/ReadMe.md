@@ -91,3 +91,4 @@ seq.add("cat"); // this fails
 
 * main.cpp needs to import Sequence.h, not Sequence.cpp
 * It's better practice to have openFile return a boolean so we can check it/send an error message if opening it doesn't work.
+* When you compile, it won't bring over files like oliver.txt unless you include that file in the CMakeLists.txt file. You essentially need to tell it to copy the file into the build/ folder
