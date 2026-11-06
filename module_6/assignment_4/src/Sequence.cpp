@@ -46,3 +46,17 @@ void Sequence::add(const std::string& word) {
 
     length++;
 }
+
+int Sequence::search(const std::string& word) const {
+    Node* current = head;
+    int comparisons = 0;
+
+    while (current != nullptr) {
+        comparisons++;
+        if (current->word == word) {
+            return comparisons; // word found
+        }
+        current = current->next;
+    }
+    return length; // not found--returns sequence length
+}

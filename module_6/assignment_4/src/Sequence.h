@@ -25,7 +25,7 @@ public:
 
     void add(const std::string& word); // see note on const in ReadMe under Lessons Learned
 
-    //TODO: Additional functions
+    int search(const std::string &word) const;
 };
 
 
