@@ -57,8 +57,8 @@ bool WordParser::getNextWord(std::string& word) {
             // add characters to the word until it hits a space/non-letter character
             word += toLowerCase(ch);
         }
-        else {
-            // will catch any non-alphabetical characters
+        else if (ch !='\'') {
+            // any non-letter than an apostrophe ends the word
             break;
         }
         file.get(ch);

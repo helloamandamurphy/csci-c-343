@@ -44,6 +44,10 @@ int main() {
     // Load words into the dictionary by the first character.
     std::string dictionaryWord;
     while (dictFile >> dictionaryWord) {
+        // account for capitalization--convert to lowercase
+        for (char& c : dictionaryWord) {
+            c = static_cast<char>(std::tolower(c));
+        }
         if (!dictionaryWord.empty() && isValidCharacterRange(dictionaryWord)) {
             int index = getLetterIndex(dictionaryWord[0]);
                 dictionary[index].add(dictionaryWord);
