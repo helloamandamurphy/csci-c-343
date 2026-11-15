@@ -2,8 +2,8 @@
 // Created by Amanda Murphy on 10/31/26.
 //
 
-#ifndef ASSIGNMENT_4_WORDPARSER_H
-#define ASSIGNMENT_4_WORDPARSER_H
+#ifndef ASSIGNMENT_5_WORDPARSER_H
+#define ASSIGNMENT_5_WORDPARSER_H
 #pragma once
 #include <string>
 #include <fstream>
@@ -33,4 +33,4 @@ public:
 };
 
 
-#endif //ASSIGNMENT_4_WORDPARSER_H
+#endif //ASSIGNMENT_5_WORDPARSER_H
