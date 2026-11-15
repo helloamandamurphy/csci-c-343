@@ -90,14 +90,25 @@ int main() {
     bookParser.closeFile();
 
     // Print out
+    std::cout << std::fixed << std::setprecision(2); // increase output precision
     std::cout << "Words Found: " << wordsFound << std::endl;
     std::cout << "Words Not Found: " << wordsNotFound << std::endl;
     std::cout << "Total words: "  << (wordsFound + wordsNotFound) << std::endl;
+    std::cout << "Comparisons Found: " << comparisonsFound << std::endl;
+    std::cout << "Comparisons Not Found: " << comparisonsNotFound << std::endl;
 
-    double averageCompsFound = comparisonsFound/wordsFound;
+    // Get average for Comps Found
+    double averageCompsFound = 0.0; // if wordsFound is 0, then return 0.0
+    if (wordsFound > 0) {
+        averageCompsFound = static_cast<double>(comparisonsFound) / wordsFound;
+    }
     std::cout << "Average Comparisons Found: " << averageCompsFound << std::endl;
 
-    double averageCompsNotFound = comparisonsNotFound/wordsNotFound;
+    // Get average for Comps Not Found
+    double averageCompsNotFound = 0.0; // if wordsNotFound is 0, then return 0.0
+    if (wordsNotFound > 0) {
+        averageCompsNotFound = static_cast<double>(comparisonsNotFound)/wordsNotFound;
+    }
     std::cout << "Average Comparisons Not Found: " << averageCompsNotFound << std::endl;
 
     return 0;
