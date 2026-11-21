@@ -11,4 +11,5 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/random_dictionary.txt DESTINATION ${CMAKE_
 add_executable(assignment_5 main.cpp
         src/AvlNode.h
         src/WordParser.cpp
-        src/WordParser.h)
+        src/WordParser.h
+        src/AVLTree.h)
