@@ -9,8 +9,6 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/random_dictionary.txt DESTINATION ${CMAKE_
 
 
 add_executable(assignment_5 main.cpp
-        src/Sequence.cpp
-        src/Sequence.h
-        src/Node.h
+        src/AvlNode.h
         src/WordParser.cpp
         src/WordParser.h)
