@@ -4,6 +4,7 @@
 
 #ifndef ASSIGNMENT_5_AVLTREE_H
 #define ASSIGNMENT_5_AVLTREE_H
+#include "AvlNode.h"
 
 class AVLTree {
 // Using AVL Code from textbook as example
@@ -17,7 +18,20 @@ class AVLTree {
         makeEmpty(root);
     }
 
+    // TODO Insert
+
+    // TODO Search
+
     private:
+    AvlNode* root;
+
+    // From Figure 4.41
+    int height (AvlNode* node) const {
+        // if t is a nullptr, return -1; if false, return the height of t
+        return t  == nullptr ? -1 : t->height;
+    }
+    
+    static const int ALLOWED_IMBALANCE = 1;
     // HELPERS
 
     // Helper function for the desconstructor--uses recursion to empty nodes and set to nullptr.
