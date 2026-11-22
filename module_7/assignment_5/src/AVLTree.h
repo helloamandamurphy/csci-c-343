@@ -29,16 +29,18 @@ class AVLTree {
     AvlNode* root;
 
     // From Figure 4.41
-    int height (AvlNode* node) const {
+    // Returns the height of node t or -1 if nullpointer
+    int height (AvlNode *t) const {
         // if t is a nullptr, return -1; if false, return the height of t
         return t  == nullptr ? -1 : t->height;
     }
 
     /**
-    * Internal method to insert into a subtree
-    * x is the item to insert
-    * t is the node that roots the subtree
-    * Set the new root of the subtree.
+     * From Figure 4.42
+     * Internal method to insert into a subtree
+     * x is the item to insert
+     * t is the node that roots the subtree
+     * Set the new root of the subtree.
     */
     void insert(const Comparable & x, AvlNode * & t) {
         if (t == nullptr) {
@@ -80,11 +82,60 @@ class AVLTree {
                 doubleWithRightChild(t);
             }
         }
-        t->height = max(height(t->left), height(t->right)) + 1
+        t->height = std::max(height(t->left), height(t->right)) + 1
 
     }
 
-    // TODO single+double right and left
+    /**
+     * From figure 4.44
+     * Rotate binary tree node with left child.
+     * For AVL trees, this is a single rotation for case 1.
+     * Update heights, then set new root.
+     */
+    void rotateWithLeftChild(AvlNode* & k2) { // reference to a pointer of unbalanced root k2
+        AvlNode *k1 = k2->left; // saves temporary pointer (k1) to k2's left child
+        k2->left = k1->right; // detaches k1's right subtree (Y from diagram) and reattaches it to k2 (as left child)
+        k1->right = k2; // sets k2 as the right child of k1 (moves k1 up to the root position)
+        k2->height = std::max(height(k2->left), height(k2->right)) + 1; // recalculates k2's height
+        k1->height = std::max(height(k1->left), k2->height) + 1; // recalculates k1's height
+        k2 = k1; // Updates incoming reference parameter k2 to point at k1 (now the root)
+    }
+
+    /**
+     * Wrote without textbook reference
+     * Rotate tree node with right child, update heights, then set new root
+     */
+    void rotateWithRightChild(AvlNode * & k1) {
+        AvlNode *k2 = k1->right; // saves temporary pointer (k2) to k1's right child
+        k1->right = k2->left; // detaches k2's left subtree and reattaches it as k1's right child
+        k2->left = k1; // sets k1 as the left child of k2 (moves k2 up to the root position)
+        k1->height = std::max(height(k1->left), height(k1->right)) + 1; // recalculates k1's height
+        k2->height = std::max(height(k2->right), k1->height) + 1; // recalculates k2's height
+        k1 = k2; // Updates incoming reference parameter to k1 to point at k2 (now the root)
+    }
+
+    /**
+     * From figure 4.46
+     * Double rotate binary tree node: first left child
+     * with its right child; then node k3 with new left child.
+     * For AVL trees, this is a double rotation for case 2.
+     * Update heights, then set new root.
+     */
+    void doubleWithLeftChild(AvlNode * & k3) {
+        rotateWithRightChild(k3->left);
+        rotateWithLeftChild(k3);
+    }
+
+    /** Wrote without textbook reference
+     * Double rotate binary tree node: first right child
+     * with its left child; then node k1 with new right child.
+     * Update heights, then set new root.
+     */
+    void doubleWithRightChild(AvlNode * & k1) {
+        rotateWithLeftChild(k1->right);
+        rotateWithRightChild(k1);
+    }
+
 
     // HELPERS
 
@@ -97,7 +148,6 @@ class AVLTree {
         }
         t = nullptr;
     }
-
 
 };
 

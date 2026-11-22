@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/Sequence.h"
+#include "src/AVLTree.h"
 #include "src/WordParser.h"
 
 static bool isOpenSuccess(const std::ifstream &fileStream, const std::string& fileName) {
@@ -30,8 +30,7 @@ static int getLetterIndex(char c) {
 }
 
 int main() {
-    // Create a dictionary--26 Sequence objects (one for each letter of the alphabet)
-    Sequence dictionary[26];
+    AVLTree dictionary[26];
 
     // Load words from random_dictionary.txt
     std::string randomDictionary = "random_dictionary.txt";
@@ -50,7 +49,7 @@ int main() {
         }
         if (!dictionaryWord.empty() && isValidCharacterRange(dictionaryWord)) {
             int index = getLetterIndex(dictionaryWord[0]);
-                dictionary[index].add(dictionaryWord);
+                dictionary[index].insert(dictionaryWord);
         }
     }
     dictFile.close();
@@ -76,8 +75,10 @@ int main() {
         }
 
         int index = getLetterIndex(word[0]);
-        int comparisons = dictionary[index].search(word);
-        int seqLength = dictionary[index].getLength();
+        int comparisons = 0; // TODO remove, just trying to compile
+        int seqLength = 0; // TODO remove, just trying to compile
+        // int comparisons = dictionary[index].search(word);
+        // int seqLength = dictionary[index].getLength();
 
         // if comparisons == length, the word was not found
         if (comparisons == seqLength) {
