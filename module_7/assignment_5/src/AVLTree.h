@@ -6,6 +6,8 @@
 #define ASSIGNMENT_5_AVLTREE_H
 #include "AvlNode.h"
 
+template<typename Comparable>
+
 class AVLTree {
 // Using AVL Code from textbook as example
     public:
@@ -82,7 +84,7 @@ class AVLTree {
                 doubleWithRightChild(t);
             }
         }
-        t->height = std::max(height(t->left), height(t->right)) + 1
+        t->height = std::max(height(t->left), height(t->right)) + 1;
 
     }
 

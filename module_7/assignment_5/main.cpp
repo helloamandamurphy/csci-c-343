@@ -30,7 +30,7 @@ static int getLetterIndex(char c) {
 }
 
 int main() {
-    AVLTree dictionary[26];
+    AVLTree<std::string> dictionary[26];
 
     // Load words from random_dictionary.txt
     std::string randomDictionary = "random_dictionary.txt";
