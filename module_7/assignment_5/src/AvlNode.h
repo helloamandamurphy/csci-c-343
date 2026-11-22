@@ -9,6 +9,7 @@
 
 // Assignment 4: Originally single linked list node
 // Assignment 5 Update: Node for AVL Tree
+template <typename Comparable>
 struct AvlNode {
     std::string word;
     AvlNode* left;

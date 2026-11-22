@@ -75,13 +75,11 @@ int main() {
         }
 
         int index = getLetterIndex(word[0]);
-        int comparisons = 0; // TODO remove, just trying to compile
-        int seqLength = 0; // TODO remove, just trying to compile
-        // int comparisons = dictionary[index].search(word);
-        // int seqLength = dictionary[index].getLength();
+        bool found = false;
+        int comparisons = dictionary[index].search(word, found);
 
-        // if comparisons == length, the word was not found
-        if (comparisons == seqLength) {
+        // if not found, update comparisonsNotFound and increment up wordsNotFound
+        if (!found) {
             comparisonsNotFound += comparisons;
             ++wordsNotFound;
         }
