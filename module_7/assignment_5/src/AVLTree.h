@@ -24,7 +24,7 @@ class AVLTree {
     }
 
     // public insert method
-    void insert (const std::string & x) {
+    void insert (const Comparable & x) {
         insert(x, root);
     }
 

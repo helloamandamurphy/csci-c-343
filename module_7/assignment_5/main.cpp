@@ -1,7 +1,11 @@
 #include <iostream>
 #include "src/AVLTree.h"
 #include "src/WordParser.h"
+#include <iomanip>
+#include <fstream>
 
+// Checks if file can open, returns true if successful, false if unsuccessful
+// Overloaded function so this one takes a filestream and filename as input
 static bool isOpenSuccess(const std::ifstream &fileStream, const std::string& fileName) {
     if (!fileStream.is_open()) {
         std::cerr << "Error opening " << fileName << std::endl;
@@ -10,6 +14,8 @@ static bool isOpenSuccess(const std::ifstream &fileStream, const std::string& fi
     return true;
 }
 
+// Checks if file can open, returns true if successful, false if unsuccessful
+// Overloaded function so this one takes WordParser and filename as input
 static bool isOpenSuccess(WordParser& parser, const std::string& fileName) {
     if (!parser.openFile(fileName)) {
         std::cerr << "Error opening " << fileName << std::endl;
@@ -18,10 +24,12 @@ static bool isOpenSuccess(WordParser& parser, const std::string& fileName) {
     return true;
 }
 
+// Checks if the first character falls between a and z (valid) or not
 static bool isValidCharacterRange(std::string dictionaryWord) {
     return dictionaryWord[0] >= 'a' && dictionaryWord[0] <= 'z';
 }
 
+// Uses ASCII math to determine index value of a given character
 static int getLetterIndex(char c) {
     // uses ASCII math to determine index value.
     // 'a' = 97, so 97-97 = 0
@@ -36,6 +44,7 @@ int main() {
     std::string randomDictionary = "random_dictionary.txt";
     std::ifstream dictFile(randomDictionary);
 
+    // Checks if dictionary file opened successfully, if not, exit program
     if (!isOpenSuccess(dictFile, randomDictionary)) {
         return 1;
     }
@@ -47,6 +56,8 @@ int main() {
         for (char& c : dictionaryWord) {
             c = static_cast<char>(std::tolower(c));
         }
+        // if the word is not empty and if it has a valid character range,
+        // add it to the correct "bucket" for the first character
         if (!dictionaryWord.empty() && isValidCharacterRange(dictionaryWord)) {
             int index = getLetterIndex(dictionaryWord[0]);
                 dictionary[index].insert(dictionaryWord);
