@@ -13,3 +13,5 @@ add_executable(assignment_5 main.cpp
         src/WordParser.cpp
         src/WordParser.h
         src/AVLTree.h)
+
+add_executable(test_avl_tree test/test_avl_tree.cpp src/AVLTree.h src/AvlNode.h)

@@ -33,6 +33,12 @@ class AVLTree {
         return contains(x, root, found);
     }
 
+    // PUBLIC HELPER
+    // Helper function for testing the AVL tree
+    int treeHeight() const {
+        return height (root);
+    }
+
     private:
     AvlNode<Comparable>* root;
 
@@ -167,7 +173,7 @@ class AVLTree {
     }
 
 
-    // HELPERS
+    // PRIVATE HELPERS
 
     // Helper function for the desconstructor--uses recursion to empty nodes and set to nullptr.
     void makeEmpty(AvlNode<Comparable> * & t) {

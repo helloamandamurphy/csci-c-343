@@ -20,3 +20,12 @@ cmake --build .
 
 ./assignment_5
 ```
+
+## How to run tests
+```bash
+// assuming you have a build directory
+
+cmake .. 
+cmake --build . --target test_avl_tree
+./test_avl_tree
+```
